@@ -47,7 +47,30 @@ function filter(arr, callback) {
 }
 
 
-function reduce(arr, callback) {
+function reduce(arr, callback /*, prevVal */) {
+     
+     var result;
+
+     //if the passed in parameter is not an array, just return undefined
+	if(!Array.isArray(arr))
+		return result;
+
+    //if initial value is passed in
+    if(arguments[2] != undefined) {
+       result = arguments[2];
+       //console.log("Previous Value = " + result);
+    }
+    
+    result = callback(arr.pop(), result);
+    var len = arr.length;
+
+    if(len === 0)
+    	return result;
+
+    //console.log("result = " + result);
+    //console.log("len = " + len);
+
+    return reduce(arr, callback, result);
 
 }
 
@@ -86,8 +109,13 @@ var divisibleByTwo = function(value)  {
 console.log(filter(nums, divisibleByTwo));  // expect [2, 4]
 
 
+/* testing reduce */
 
-
+var anotherNums = [1,2,3,4,5];
+var addEm = function(element, prevVal)   {
+	return element + prevVal;
+}
+console.log(reduce(anotherNums, addEm, 0));   // expect 15
 
 
 
