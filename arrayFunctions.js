@@ -77,11 +77,41 @@ function reduce(arr, callback /*, prevVal */) {
 
 function every(arr, callback) {
 
+	//if the passed in parameter is not an array, return false 
+	if(!Array.isArray(arr))
+		return false;
+    
+    var all = true;
+
+    for(var i = 0; i < arr.length; i++)  {
+
+    	if(!callback(arr[i]))   {
+       	   	all = false;
+       	    break;
+        }
+    }
+
+    return all;
 }
 
 
 function some(arr, callback)  {
+    
+    //if the passed in parameter is not an array, return false 
+	if(!Array.isArray(arr))
+		return false;
+    
+    var some = false;
 
+    for(var i = 0; i < arr.length; i++)  {
+
+    	if(callback(arr[i]))   {
+       	   some = true;
+       	   break;
+        }          
+    }
+
+    return some;
 }
 
 
@@ -118,6 +148,19 @@ var addEm = function(element, prevVal)   {
 console.log(reduce(anotherNums, addEm, 0));   // expect 15
 
 
+/* testing every */
 
 
+var twos = [2,4,6,8,10];
+var almostTwos = [2,4,6,8,11];
 
+console.log(every(twos, divisibleByTwo));  // expect true
+console.log(every(almostTwos, divisibleByTwo));   // expect false
+
+/* testing some */
+
+var odds = [1,3, 5, 7, 9, 11];
+
+console.log(some(twos, divisibleByTwo));  // expect true
+console.log(some(almostTwos, divisibleByTwo));   // expect true
+console.log(some(odds, divisibleByTwo));   // expect false
