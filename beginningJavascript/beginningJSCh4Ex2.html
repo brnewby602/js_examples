@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Chapter 4, Example 2</title>
+      <script>
+         function timesTable(num, start, end) {
+
+            var table = [];
+
+            for( var j = 0, i = start; i <=end; i++ )  {
+               table[j] = [i, num * i];
+               j++;
+            }
+
+            //console.log(table);
+
+            return table;
+         }
+      </script>
+   </head>
+   <body>
+      <script>
+         
+         var timesNum = parseInt(prompt("What number would you like to see the times table for?"));
+
+         do {
+            var start = parseInt(prompt("What number would you like to start with?"));
+            var end = parseInt(prompt("What number would you like to end with?"));
+
+            if(!Number.isNaN(timesNum)) {
+
+               var timesTab = timesTable(timesNum, start, end);
+
+               
+               for(index in timesTab) {
+                   document.write(timesNum + " * " + timesTab[index][0] + " = " + timesTab[index][1] + "<br />");
+               }
+            }
+            else {
+              document.write("You did not enter a number.");
+            }
+         } while( timesNum = prompt("What number would you like to see the times table for? Enter -1 if you would like to exit.") != -1);
+
+      </script>
+   </body>
+</html> 
+
