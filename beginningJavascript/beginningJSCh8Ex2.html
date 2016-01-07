@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Chapter 8, Example 3</title>
+</head>
+<body>
+    <img src="" width="200" height="150" alt="My Image" />
+    <script>
+
+        var imgPath = "file:///Users/bnewby/Projects/js/js_examples/beginningJavascript/";
+
+        var myImages = [
+            "usa.gif",
+            "canada.gif",
+            "jamaica.gif",
+            "mexico.gif"
+        ];
+
+
+        document.images[0].src = imgPath + myImages[Math.floor(Math.random() * myImages.length)];
+
+    </script>
+</body>
+</html>
