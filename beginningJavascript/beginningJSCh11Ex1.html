@@ -1,10 +1,87 @@
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <title>Chapter 11, Exercise 1</title>
+    <script>
+        function convertDegrees(degrees, convertTo, decPlaces) {
+
+            if (typeof decPlaces === "undefined") {
+                decPlaces = 2;
+            }
+
+            var converted = -1;
+
+            switch( convertTo ) {
+
+                case "C": {
+                    converted = 5/9 * (degrees - 32);
+                    break;
+                }
+                case "F": {
+                    converted = 9/5 * degrees + 32;
+                    break;
+                }
+
+            }
+
+            if(converted.toFixed)
+                converted = converted.toFixed(decPlaces);
+            else {
+                converted = Math.round(converted * Math.pow(10, decPlaces)) / Math.pow(10, decPlaces);
+            }
+
+            return converted;
+        }
+    </script>
 </head>
 <body>
+    <form id="form1" name="form1">
+        <p>
+
+            <label for="fahrenheit">Enter the degrees in Fahrenheit to convert to Celsius:</label>
+            <input type="number" id="fahrenheit" name="fahrenheit" value="0"/>
+            <input type="button" id="convertBtn" name="convertBtn" value="Convert"/>
+        </p>
+
+    </form>
+
+    <p style="display:none" id="resultDisplay">
+        <label for="result" id="degreesLbl">The temperature converted to Fahrenheit is:</label>
+        <output id="result" name="result" form="form1" for="fahrenheit"></output>&#176;
+    </p>
+
+    <script>
+
+        var myForm = document.form1;
+        var output = myForm.result;
+
+        //Put focus and select on the input for degrees
+        document.form1.fahrenheit.focus();
+        document.form1.fahrenheit.select();
+
+        function convertTemperatureButtonClicked(e) {
+
+            var degreeVal = document.form1.result.value;
+
+            if (isNaN(degreeVal) === true) {
+                output.value = "Error, invalid value entered, please enter a number.";
+
+            }
+            else {
+                output.value = convertDegrees(myForm.fahrenheit.value, "C");
+
+            }
+
+            document.getElementById("resultDisplay").removeAttribute("style");
+        }
+
+        myForm.convertBtn.addEventListener("click", convertTemperatureButtonClicked );
+
+
+    </script>
 
 </body>
-</html>
+</html> 
